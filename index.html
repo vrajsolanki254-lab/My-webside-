@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gift For You 💝</title>
+
+<style>
+/* --- Common Reset --- */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  height:100vh;
+  background:linear-gradient(135deg,#ff6fa1,#ff9ecb);
+  display:flex;
+  flex-direction: column; /* Isse content ek ke niche ek aayega */
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  position: relative; 
+}
+
+/* --- Floating Hearts --- */
+.heart{
+  position:absolute;
+  font-size:24px;
+  animation:float 6s linear infinite;
+  opacity:0.7;
+  z-index:0;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-10vh);}
+}
+
+.h1{left:15%;animation-delay:0s;}
+.h2{left:35%;animation-delay:2s;}
+.h3{left:60%;animation-delay:4s;}
+.h4{left:80%;animation-delay:1s;}
+.h5{left:50%;animation-delay:3s;}
+
+/* --- Main Container --- */
+.container{
+  background:rgba(255,255,255,0.25);
+  backdrop-filter:blur(12px);
+  padding:50px 40px;
+  border-radius:25px;
+  text-align:center;
+  width:90%;
+  max-width:420px;
+  box-shadow:0 10px 35px rgba(0,0,0,0.25);
+  color:white;
+  z-index:2;
+  margin-bottom: 20px; /* Card ke niche thodi jagah banai hai */
+}
+
+/* --- New Position for Name --- */
+.footer-name {
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 1px;
+  z-index: 10;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+  opacity: 0.9;
+}
+
+.main-heart{
+  font-size:50px;
+  animation:beat 1s infinite;
+  margin-bottom:15px;
+}
+
+@keyframes beat{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+  100%{transform:scale(1);}
+}
+
+h1{
+  font-size:32px;
+  margin-bottom:15px;
+}
+
+p, .lyrics {
+  font-size:22px;
+  margin-bottom:30px;
+  opacity:0.9;
+  font-weight: 600;
+}
+
+.lyrics {
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade 0.6s ease;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(15px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+button{
+  background:#ff2f7d;
+  border:none;
+  padding:14px 40px;
+  font-size:18px;
+  border-radius:30px;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+button:hover{
+  background:#ff0f68;
+  transform:scale(1.08);
+}
+</style>
+</head>
+
+<body>
+
+<div class="heart h1">💖</div>
+<div class="heart h2">💕</div>
+<div class="heart h3">💗</div>
+<div class="heart h4">💘</div>
+<div class="heart h5">❤️</div>
+
+<div class="container" id="mainCard">
+  <div class="main-heart">💝</div>
+  <h1 id="title">Do You Want a Gift?</h1>
+  
+  <div id="contentArea">
+    <p>I made this specially for you 💕</p>
+    <button id="startBtn">YES</button>
+  </div>
+</div>
+
+<div class="footer-name">Program by Vraj</div>
+
+<audio id="song" src="12.mp3" preload="auto"></audio>
+
+<script>
+const song = document.getElementById("song");
+const contentArea = document.getElementById("contentArea");
+const title = document.getElementById("title");
+const startBtn = document.getElementById("startBtn");
+
+const timedLyrics = [
+  { text:"Kya khub lagti ho 💖", time:0 },
+  { text:"Badi sundar dikhti ho 😍", time:3.6 },
+  { text:"Kya khub lagti ho 💕", time:6.4 },
+  { text:"Badi sundar dikhti ho 💗", time:10 },
+];
+
+let index = 0;
+
+startBtn.addEventListener("click", function() {
+  title.innerText = "Only For You 💝";
+  contentArea.innerHTML = '<div class="lyrics" id="lyrics">💗 Loading Magic...</div>';
+  
+  song.play().then(() => {
+    startLyrics();
+  }).catch((error) => {
+    console.log("Playback failed:", error);
+    document.getElementById("lyrics").innerText = "Error: Music file nahi mili!";
+  });
+});
+
+function startLyrics() {
+  const lyricsBox = document.getElementById("lyrics");
+
+  song.addEventListener("timeupdate", () => {
+    if (index < timedLyrics.length) {
+      if (song.currentTime >= timedLyrics[index].time) {
+        lyricsBox.innerText = timedLyrics[index].text;
+        lyricsBox.style.animation = "none";
+        lyricsBox.offsetHeight; 
+        lyricsBox.style.animation = "fade 0.6s ease";
+        index++;
+      }
+    }
+  });
+}
+</script>
+
+</body>
+</html>
