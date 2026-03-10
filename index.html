@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VRAJ’S UNIVERSE ✨</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        body, html { height: 100%; overflow: hidden; background: #000; }
+
+        /* Background Video */
+        #bg-video {
+            position: fixed;
+            right: 0; bottom: 0;
+            min-width: 100%; min-height: 100%;
+            z-index: -1;
+            filter: brightness(0.4);
+            object-fit: cover;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            max-width: 400px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        h1 { font-size: 27px; margin-bottom: 15px; letter-spacing: 2px; }
+        p { font-size: 20px; line-height: 1.6; margin-bottom: 25px; opacity: 0.9; }
+
+        /* Button Hidden Initially */
+        #snap-btn {
+            background: #FFFC00;
+            color: #000;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            display: inline-block;
+            opacity: 0; /* Shuru mein invisible */
+            visibility: hidden;
+            transition: opacity 1s ease-in-out, transform 0.3s ease;
+        }
+
+        /* Animation class for button */
+        .show-btn {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        #snap-btn:hover { transform: scale(1.1); }
+
+        .footer { margin-top: 10px; font-size: 12px; opacity: 0.6; }
+    </style>
+</head>
+<body onclick="playAudio()"> <video autoplay muted loop **playsinline** id="bg-video">
+        <source src="111.mp4" type="video/mp4">
+    </video>
+
+    <audio id="bg-music" loop>
+        <source src="songg.mp3" type="audio/mpeg"> </audio>
+
+    <div class="container">
+        <div class="card">
+            <h1>VRAJ’S UNIVERSE ✨  </h1>
+            
+            <p>
+                Main har kisi ke liye nahi hu, par shayad aapke liye ho sakta hu. Let’s see ye safar kaha le jata hai... 😌"
+            </p>
+
+            <a href="https://www.snapchat.com/add/onlyjaanu_here" id="snap-btn">Click me 👻</a>
+
+            <div class="footer">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 3 Second (3000ms) ke baad button dikhane ke liye
+        setTimeout(function() {
+            document.getElementById('snap-btn').classList.add('show-btn');
+        }, 3000);
+
+        // Music play karne ka function
+        function playAudio() {
+            var audio = document.getElementById("bg-music");
+            audio.play().catch(function(error) {
+                console.log("Browser ne music block kiya, click again.");
+            });
+        }
+    </script>
+
+</body>
+</html>
